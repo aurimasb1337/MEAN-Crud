@@ -1,0 +1,58 @@
+<div class="d-flex flex-row-reverse p-2">
+  <button class="btn btn-primary ml-1" (click)="open(newPlate)">New</button>
+</div>
+
+<ng-template #newPlate let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-new-plate">New Number Plate</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('cancel'); close()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div *ngIf="status === Status.new">
+    <div class="modal-body">
+      <form (ngSubmit)="open(newPlate)">
+        <div class="form-group">
+          <div class="form-group">
+              <input type="text" name="ownerName" placeholder="Owner Name"
+                  [(ngModel)]="plate.owner" class="form-control" required>
+          </div>
+          <div class="form-group">
+              <input type="text" name="plateNumber" placeholder="Plate Number"
+                  pattern="[\A-Za-z]{1,3}[\d]{1,3}"
+                  [(ngModel)]="plate.number" class="form-control" required>
+          </div>
+        </div>
+        <div class="font-weight-light text-danger">{{ error }}</div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="submit" class="btn btn-outline-dark" (click)="modal.close('save')">Save</button>
+    </div>
+  </div>
+
+  <div *ngIf="status === Status.done">
+    <div class="modal-body">
+      New Plate has been created!
+    </div>
+
+    <div class="d-flex flex-row-reverse p-2">
+      <button type="button" class="btn btn-success" aria-label="Close" (click)="modal.dismiss('cancel'); close(true)">
+        <span aria-hidden="true">Close</span>
+      </button>
+    </div>
+  </div>
+
+  <div *ngIf="status === Status.error">
+    <div class="modal-body">
+      Sorry, some kind of error occured!
+    </div>
+
+    <div class="d-flex flex-row-reverse p-2">
+      <button type="button" class="btn btn-secondary" aria-label="Close" (click)="modal.dismiss('cancel'); close()">
+        <span aria-hidden="true">Close</span>
+      </button>
+    </div>
+  </div>
+</ng-template>
