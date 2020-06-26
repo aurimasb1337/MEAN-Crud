@@ -3,6 +3,7 @@ import { PlatesService } from './plates.service';
 import { EventEmitter } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Plate } from './Plate';
+import { analyzeAndValidateNgModules } from '@angular/compiler';
 
 enum Status {
   new,
@@ -20,9 +21,15 @@ export class PlatesComponent implements OnInit {
 
   plates: any;
   plate: Plate = {
+    id: null,
     owner: '',
     number: ''
   };
+  plateToDelete: Plate = {
+    id: null,
+    owner: '',
+    number: ''
+  }
 
   pages = [];
   currentPage = null;
@@ -66,16 +73,23 @@ export class PlatesComponent implements OnInit {
     });
   }
 
-  openDeleteModal(content, id) {
+  openDeleteModal(content, plate) {
+    this.plateToDelete = {
+      id: plate._id,
+      owner: plate.owner,
+      number: plate.plateNumber
+    };
+
     this.modalService.open(content, {ariaLabelledBy: 'modal-new-plate'}).result.then((result) => {
       if (result == "save") {
-        this.platesService.delete(id)
+        this.platesService.delete(this.plateToDelete.id)
         .subscribe(data => {
           this.deleteStatus = Status.done;
         }, (err) => {
+          console.log(err);
           this.deleteStatus= Status.error;
         });
-        this.openDeleteModal(content, id);
+        this.openDeleteModal(content, plate);
       }
     }, (reason) => {
       if (reason == "close") {
@@ -125,6 +139,7 @@ export class PlatesComponent implements OnInit {
 
   closeUpdateModal(reload = false) {
     this.plate = {
+      id: null,
       owner: '',
       number: ''
     };

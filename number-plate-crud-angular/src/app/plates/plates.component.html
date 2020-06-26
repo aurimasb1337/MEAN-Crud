@@ -52,7 +52,7 @@
               <button class="btn btn-primary mr-1"
                 (click)="openUpdateModal(updatePlate, plate)">Edit</button>
 
-              <button class="btn btn-danger mr-1" (click)="openDeleteModal(deletePlate, plate._id)">Delete</button>
+              <button class="btn btn-danger mr-1" (click)="openDeleteModal(deletePlate, plate)">Delete</button>
             </div>
           </td>
         </tr>
@@ -62,7 +62,7 @@
 
   <ng-template #deletePlate let-modal>
     <div class="modal-header">
-      <h4 class="modal-title" id="modal-delete-plate">New Number Plate</h4>
+      <h4 class="modal-title" id="modal-delete-plate">Delete Number Plate</h4>
       <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('cancel');">
         <span aria-hidden="true">&times;</span>
       </button>
@@ -71,11 +71,14 @@
     <div>
       <div *ngIf="deleteStatus === Status.new">
         <div class="modal-body">
-          <b>Are you sure, you want to delete this plate?</b>
+          <b>Are you sure, you want to delete this plate {{plateToDelete.number}}?</b>
         </div>
 
-        <div class="modal-footer">
-          <button type="submit" class="btn btn-outline-dark" (click)="modal.close('save')">Save</button>
+        <div class="modal-footer d-flex flex-row flex-wrap">
+          <button type="button" class="btn btn-light" aria-label="Close" (click)="modal.dismiss('cancel');">
+            No
+          </button>
+          <button type="submit" class="btn btn-danger" (click)="modal.close('save')">Yes</button>
         </div>
       </div>
 
@@ -100,7 +103,7 @@
 
   <ng-template #updatePlate let-modal>
     <div class="modal-header">
-      <h4 class="modal-title" id="modal-update-plate">Update Plate</h4>
+      <h4 class="modal-title" id="modal-update-plate">Update Number Plate</h4>
       <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('cancel'); closeUpdateModal()">
         <span aria-hidden="true">&times;</span>
       </button>

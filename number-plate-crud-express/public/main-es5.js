@@ -619,6 +619,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.modalService = modalService;
         this.platesService = platesService;
         this.plate = {
+          id: null,
           owner: '',
           number: ''
         };
@@ -663,7 +664,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                 owner: _this.plate.owner,
                 plateNumber: _this.plate.number
               }).subscribe(function (data) {
-                _this.status = Status.done;
+                if (data != "PLATE_EXISTS") {
+                  _this.status = Status.done;
+                } else {
+                  _this.error = 'A plate with same number already exists!';
+                }
               }, function (err) {
                 _this.status = Status.error;
               });
@@ -679,6 +684,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         value: function close() {
           var reload = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
           this.plate = {
+            id: null,
             owner: '',
             number: ''
           };
@@ -903,7 +909,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
           var _r3 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵreference"](30);
 
-          return ctx_r14.openDeleteModal(_r3, plate_r10._id);
+          return ctx_r14.openDeleteModal(_r3, plate_r10);
         });
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](10, "Delete");
@@ -940,7 +946,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "b");
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](3, "Are you sure, you want to delete this plate?");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](3);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
@@ -955,10 +961,24 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
           var modal_r15 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]().$implicit;
 
+          return modal_r15.dismiss("cancel");
+        });
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](6, " No ");
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](7, "button", 30);
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function PlatesComponent_ng_template_29_div_7_Template_button_click_7_listener() {
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r21);
+
+          var modal_r15 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]().$implicit;
+
           return modal_r15.close("save");
         });
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](6, "Save");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](8, "Yes");
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
@@ -966,11 +986,19 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
       }
+
+      if (rf & 2) {
+        var ctx_r16 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](3);
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"]("Are you sure, you want to delete this plate ", ctx_r16.plateToDelete.number, "?");
+      }
     }
 
     function PlatesComponent_ng_template_29_div_8_Template(rf, ctx) {
       if (rf & 1) {
-        var _r24 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+        var _r26 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div");
 
@@ -982,12 +1010,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "div", 30);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "div", 31);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](5, "button", 25);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function PlatesComponent_ng_template_29_div_8_Template_button_click_5_listener() {
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r24);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r26);
 
           var modal_r15 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]().$implicit;
 
@@ -1034,7 +1062,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "h4", 24);
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](2, "New Number Plate");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](2, "Delete Number Plate");
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
@@ -1057,7 +1085,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](6, "div");
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](7, PlatesComponent_ng_template_29_div_7_Template, 7, 0, "div", 26);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](7, PlatesComponent_ng_template_29_div_7_Template, 9, 1, "div", 26);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](8, PlatesComponent_ng_template_29_div_8_Template, 8, 0, "div", 26);
 
@@ -1085,7 +1113,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     function PlatesComponent_ng_template_31_div_6_Template(rf, ctx) {
       if (rf & 1) {
-        var _r31 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+        var _r33 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div");
 
@@ -1093,34 +1121,34 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "form");
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "div", 32);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "div", 33);
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "div", 32);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "div", 33);
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](5, "input", 33);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](5, "input", 34);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngModelChange", function PlatesComponent_ng_template_31_div_6_Template_input_ngModelChange_5_listener($event) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r31);
-
-          var ctx_r30 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
-
-          return ctx_r30.plate.owner = $event;
-        });
-
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](6, "div", 32);
-
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](7, "input", 34);
-
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngModelChange", function PlatesComponent_ng_template_31_div_6_Template_input_ngModelChange_7_listener($event) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r31);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r33);
 
           var ctx_r32 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
 
-          return ctx_r32.plate.number = $event;
+          return ctx_r32.plate.owner = $event;
+        });
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](6, "div", 33);
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](7, "input", 35);
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngModelChange", function PlatesComponent_ng_template_31_div_6_Template_input_ngModelChange_7_listener($event) {
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r33);
+
+          var ctx_r34 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
+
+          return ctx_r34.plate.number = $event;
         });
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -1129,7 +1157,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](8, "div", 35);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](8, "div", 36);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](9);
 
@@ -1139,16 +1167,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](10, "div", 28);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](10, "div", 37);
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](11, "button", 29);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](11, "button", 38);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function PlatesComponent_ng_template_31_div_6_Template_button_click_11_listener() {
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r31);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r33);
 
-          var modal_r26 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]().$implicit;
+          var modal_r28 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]().$implicit;
 
-          return modal_r26.close("save");
+          return modal_r28.close("save");
         });
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](12, "Save");
@@ -1161,25 +1189,25 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }
 
       if (rf & 2) {
-        var ctx_r27 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
+        var ctx_r29 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](5);
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngModel", ctx_r27.plate.owner);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngModel", ctx_r29.plate.owner);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngModel", ctx_r27.plate.number);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngModel", ctx_r29.plate.number);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](ctx_r27.updateError);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](ctx_r29.updateError);
       }
     }
 
     function PlatesComponent_ng_template_31_div_7_Template(rf, ctx) {
       if (rf & 1) {
-        var _r37 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+        var _r39 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div");
 
@@ -1189,19 +1217,19 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "div", 30);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "div", 31);
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "button", 36);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "button", 39);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function PlatesComponent_ng_template_31_div_7_Template_button_click_4_listener() {
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r37);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r39);
 
-          var modal_r26 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]().$implicit;
+          var modal_r28 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]().$implicit;
 
-          var ctx_r35 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
+          var ctx_r37 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
 
-          modal_r26.dismiss("cancel");
-          return ctx_r35.closeUpdateModal(true);
+          modal_r28.dismiss("cancel");
+          return ctx_r37.closeUpdateModal(true);
         });
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](5, "span", 19);
@@ -1220,7 +1248,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     function PlatesComponent_ng_template_31_div_8_Template(rf, ctx) {
       if (rf & 1) {
-        var _r40 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+        var _r42 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div");
 
@@ -1230,19 +1258,19 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "div", 30);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "div", 31);
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "button", 37);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "button", 40);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function PlatesComponent_ng_template_31_div_8_Template_button_click_4_listener() {
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r40);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r42);
 
-          var modal_r26 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]().$implicit;
+          var modal_r28 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]().$implicit;
 
-          var ctx_r38 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
+          var ctx_r40 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
 
-          modal_r26.dismiss("cancel");
-          return ctx_r38.closeUpdateModal();
+          modal_r28.dismiss("cancel");
+          return ctx_r40.closeUpdateModal();
         });
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](5, "span", 19);
@@ -1261,27 +1289,27 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     function PlatesComponent_ng_template_31_Template(rf, ctx) {
       if (rf & 1) {
-        var _r42 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+        var _r44 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 23);
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "h4", 31);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "h4", 32);
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](2, "Update Plate");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](2, "Update Number Plate");
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "button", 25);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function PlatesComponent_ng_template_31_Template_button_click_3_listener() {
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r42);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r44);
 
-          var modal_r26 = ctx.$implicit;
+          var modal_r28 = ctx.$implicit;
 
-          var ctx_r41 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
+          var ctx_r43 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
 
-          modal_r26.dismiss("cancel");
-          return ctx_r41.closeUpdateModal();
+          modal_r28.dismiss("cancel");
+          return ctx_r43.closeUpdateModal();
         });
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "span", 19);
@@ -1334,6 +1362,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.platesService = platesService;
         this.Status = Status;
         this.plate = {
+          id: null,
+          owner: '',
+          number: ''
+        };
+        this.plateToDelete = {
+          id: null,
           owner: '',
           number: ''
         };
@@ -1384,20 +1418,26 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }
       }, {
         key: "openDeleteModal",
-        value: function openDeleteModal(content, id) {
+        value: function openDeleteModal(content, plate) {
           var _this3 = this;
 
+          this.plateToDelete = {
+            id: plate._id,
+            owner: plate.owner,
+            number: plate.plateNumber
+          };
           this.modalService.open(content, {
             ariaLabelledBy: 'modal-new-plate'
           }).result.then(function (result) {
             if (result == "save") {
-              _this3.platesService["delete"](id).subscribe(function (data) {
+              _this3.platesService["delete"](_this3.plateToDelete.id).subscribe(function (data) {
                 _this3.deleteStatus = Status.done;
               }, function (err) {
+                console.log(err);
                 _this3.deleteStatus = Status.error;
               });
 
-              _this3.openDeleteModal(content, id);
+              _this3.openDeleteModal(content, plate);
             }
           }, function (reason) {
             if (reason == "close") {
@@ -1441,7 +1481,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                 owner: _this4.plate.owner,
                 plateNumber: _this4.plate.number
               }).subscribe(function (data) {
-                _this4.updateStatus = Status.done;
+                if (data != "PLATE_EXISTS") {
+                  _this4.updateStatus = Status.done;
+                } else {
+                  _this4.updateError = 'A plate with same number already exists!';
+                }
               }, function (err) {
                 _this4.updateStatus = Status.error;
               });
@@ -1457,6 +1501,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         value: function closeUpdateModal() {
           var reload = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
           this.plate = {
+            id: null,
             owner: '',
             number: ''
           };
@@ -1515,7 +1560,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       selectors: [["app-plates"]],
       decls: 33,
       vars: 6,
-      consts: [[1, "p-2"], [1, "text-center"], [1, "container"], [1, "row", "align-items-center"], [1, "col-2"], [1, "col-4"], [1, "form-control", 3, "ngModel", "disabled", "ngModelChange"], [4, "ngFor", "ngForOf"], [1, "col-6", "col-sm-4"], [1, "input-group"], ["type", "text", "placeholder", "Search", "maxlength", "64", 1, "form-control", 3, "ngModel", "ngModelChange"], [1, "input-group-append", "d-flex", "flex-row", "align-items-center"], [1, "btn", "btn-primary", 3, "click"], ["class", "btn btn-primary", 3, "click", 4, "ngIf"], [1, "p-1"], [1, "table", "table-striped"], ["scope", "col"], ["deletePlate", ""], ["updatePlate", ""], ["aria-hidden", "true"], [1, "d-flex", "flex-row", "flex-wrap"], [1, "btn", "btn-primary", "mr-1", 3, "click"], [1, "btn", "btn-danger", "mr-1", 3, "click"], [1, "modal-header"], ["id", "modal-delete-plate", 1, "modal-title"], ["type", "button", "aria-label", "Close", 1, "close", 3, "click"], [4, "ngIf"], [1, "modal-body"], [1, "modal-footer"], ["type", "submit", 1, "btn", "btn-outline-dark", 3, "click"], [1, "d-flex", "flex-row-reverse", "p-2"], ["id", "modal-update-plate", 1, "modal-title"], [1, "form-group"], ["type", "text", "name", "ownerName", "placeholder", "Owner Name", "required", "", 1, "form-control", 3, "ngModel", "ngModelChange"], ["type", "text", "name", "plateNumber", "placeholder", "Plate Number", "pattern", "[\\A-Za-z]{1,3}[\\d]{1,3}", "required", "", 1, "form-control", 3, "ngModel", "ngModelChange"], [1, "font-weight-light", "text-danger"], ["type", "button", "aria-label", "Close", 1, "btn", "btn-success", 3, "click"], ["type", "button", "aria-label", "Close", 1, "btn", "btn-secondary", 3, "click"]],
+      consts: [[1, "p-2"], [1, "text-center"], [1, "container"], [1, "row", "align-items-center"], [1, "col-2"], [1, "col-4"], [1, "form-control", 3, "ngModel", "disabled", "ngModelChange"], [4, "ngFor", "ngForOf"], [1, "col-6", "col-sm-4"], [1, "input-group"], ["type", "text", "placeholder", "Search", "maxlength", "64", 1, "form-control", 3, "ngModel", "ngModelChange"], [1, "input-group-append", "d-flex", "flex-row", "align-items-center"], [1, "btn", "btn-primary", 3, "click"], ["class", "btn btn-primary", 3, "click", 4, "ngIf"], [1, "p-1"], [1, "table", "table-striped"], ["scope", "col"], ["deletePlate", ""], ["updatePlate", ""], ["aria-hidden", "true"], [1, "d-flex", "flex-row", "flex-wrap"], [1, "btn", "btn-primary", "mr-1", 3, "click"], [1, "btn", "btn-danger", "mr-1", 3, "click"], [1, "modal-header"], ["id", "modal-delete-plate", 1, "modal-title"], ["type", "button", "aria-label", "Close", 1, "close", 3, "click"], [4, "ngIf"], [1, "modal-body"], [1, "modal-footer", "d-flex", "flex-row", "flex-wrap"], ["type", "button", "aria-label", "Close", 1, "btn", "btn-light", 3, "click"], ["type", "submit", 1, "btn", "btn-danger", 3, "click"], [1, "d-flex", "flex-row-reverse", "p-2"], ["id", "modal-update-plate", 1, "modal-title"], [1, "form-group"], ["type", "text", "name", "ownerName", "placeholder", "Owner Name", "required", "", 1, "form-control", 3, "ngModel", "ngModelChange"], ["type", "text", "name", "plateNumber", "placeholder", "Plate Number", "pattern", "[\\A-Za-z]{1,3}[\\d]{1,3}", "required", "", 1, "form-control", 3, "ngModel", "ngModelChange"], [1, "font-weight-light", "text-danger"], [1, "modal-footer"], ["type", "submit", 1, "btn", "btn-outline-dark", 3, "click"], ["type", "button", "aria-label", "Close", 1, "btn", "btn-success", 3, "click"], ["type", "button", "aria-label", "Close", 1, "btn", "btn-secondary", 3, "click"]],
       template: function PlatesComponent_Template(rf, ctx) {
         if (rf & 1) {
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);

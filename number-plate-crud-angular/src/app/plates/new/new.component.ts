@@ -16,6 +16,7 @@ enum Status {
 })
 export class NewComponent implements OnInit {
   plate: Plate = {
+    id: null,
     owner: '',
     number: ''
   };
@@ -65,6 +66,7 @@ export class NewComponent implements OnInit {
 
   close(reload = false) {
     this.plate = {
+      id: null,
       owner: '',
       number: ''
     };
